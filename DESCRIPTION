@@ -1,0 +1,20 @@
+Package: rivera.package
+Title: Analyze Siren Shape Data
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Joshua",
+           family = "Rivera",
+           role = c("aut", "cre"),
+           email = "joshua.rivera@selu.edu")
+Description: What the package does (one paragraph).
+Depends: R (>= 3.0.0)
+Imports:
+  tidyverse, iNEXT, ggplot2, assertthat, dplyr, rgeos, rnaturalearthdata, rnaturalearth, mapdata, sf, 
+  geomorph, shapes, svd, scatterplot3d, rgl, MASS, graphics, stats
+Suggests:
+  knitr, rmarkdown, testthat
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
