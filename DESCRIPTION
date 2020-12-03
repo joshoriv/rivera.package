@@ -6,8 +6,8 @@ Authors@R:
            family = "Rivera",
            role = c("aut", "cre"),
            email = "joshua.rivera@selu.edu")
-Description: What the package does (one paragraph).
-Depends: R (>= 3.0.0)
+Description: This package enables manipulation and subsequent analysis of geometric morphometric shape data The functions included in this package will allow for the construction of a specimen locality map, the performance of a generalized Procrustes analysis, and the construction of a principal components analyses graph.
+Depends: R (>= 4.0.0)
 Imports:
   tidyverse, iNEXT, ggplot2, assertthat, dplyr, rgeos, rnaturalearthdata, rnaturalearth, mapdata, sf, 
   geomorph, shapes, svd, scatterplot3d, rgl, MASS, graphics, stats
