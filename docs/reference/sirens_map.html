@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • rivera.package</title>
+<title>Generates map of specimen locality information — sirens_map • rivera.package</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Generates map of specimen locality information — sirens_map" />
+<meta property="og:description" content="Generates map of specimen locality information" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -112,72 +113,45 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Generates map of specimen locality information</h1>
+    
+    <div class="hidden name"><code>sirens_map.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Generates map of specimen locality information</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>sirens_map</span><span class='op'>(</span><span class='va'>sirens</span>, <span class='va'>Longitude</span>, <span class='va'>Latitude</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="calc_shrub_density.html">calc_shrub_density()</a></code> </p>
-        </td>
-        <td><p>Calculate density of shrub</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="calc_shrub_mass.html">calc_shrub_mass()</a></code> </p>
-        </td>
-        <td><p>Calculate mass of shrub</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="calc_shrub_vol.html">calc_shrub_vol()</a></code> </p>
-        </td>
-        <td><p>Calculate volume of shrub</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gpa.html">gpa()</a></code> </p>
-        </td>
-        <td><p>Performs and visualizes Generalized Procrustes Analysis for shape data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pca.html">pca()</a></code> <code><a href="pca.html">pca()</a></code> </p>
-        </td>
-        <td><p>Performs and visualizes a Principal Components Analysis for shape data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sirens_map.html">sirens_map()</a></code> </p>
-        </td>
-        <td><p>Generates map of specimen locality information</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>sirens</th>
+      <td><p>siren specimen dataset</p></td>
+    </tr>
+    <tr>
+      <th>Longitude</th>
+      <td><p>longitudinal coordinate (numeric)</p></td>
+    </tr>
+    <tr>
+      <th>Latitude</th>
+      <td><p>latitudinal coordinate (numeric)</p></td>
+    </tr>
+    <tr>
+      <th>world</th>
+      <td><p>the specific map used for referencing (graphic)</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>map of specimen localities (graphic)</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

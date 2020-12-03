@@ -69,7 +69,8 @@
 
       
 
-      </header><div class="row">
+      </header><link href="00_package_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="00_package_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Tutorial</h1>
@@ -84,44 +85,57 @@
 
     
     
-<p>The first thing that we usually want to include in a tutorial is how we can install the R package. Some of you have been able to push your R package to GitHub, some have not. But once you are able to, the syntax for installing those packages is going to look something like this:</p>
+<p>Howdy! The first thing one should do to utilize this set of functions is install the Rivera package. <em>code seen below</em></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"joshoriv/rivera.package"</span><span class="op">)</span></code></pre></div>
-<p>The next thing that usually comes in a tutorial is reminding people to load the package:</p>
+<p>Once the package has been installed, please be sure to load the package into your R console.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rivera.package</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning in rgl.init(initValue, onlyNULL): RGL: unable to open X11 display</code></pre>
 <pre><code>## Warning: 'rgl.init' failed, running with 'rgl.useNULL = TRUE'.</code></pre>
-<p>Three different section headers for functionality</p>
-<div id="data-cleaning-for-phylogenetics" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-cleaning-for-phylogenetics" class="anchor"></a>Data cleaning for phylogenetics</h2>
-<p>Usually provide some rationale for why someone might need to do this analysis. In the next couple sentences, usually, you’ll explain how it works. So wht kind of data will this function clean? What types of errors will it fix? What will be the output? What is expected to be in the input?</p>
-</div>
 <div id="specimen-locality-distribution-map" class="section level2">
 <h2 class="hasAnchor">
 <a href="#specimen-locality-distribution-map" class="anchor"></a>Specimen Locality Distribution Map</h2>
 <p>The purpose of this function is to generate a map of siren specimen localities. Specimen distribution maps are helpful in understanding trends in biological phenomena. In order for this function to process, the coordinate information (longitude &amp; latitude) must be available for each specimen. The world map, where the specimen datapoints will be superimposed, will be selected by providing coordinates of interest.</p>
+<p>At this point, we can go ahead and load the required packages for this tutorial. Following this we’ll be reading in the siren locality data and siren shape data (landmark coordinates).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://readr.tidyverse.org">readr</a></span><span class="op">)</span>
-<span class="va">sirens</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../inst/extdata/josh_modified_data.csv"</span><span class="op">)</span></code></pre></div>
-<pre><code>## Parsed with column specification:
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/rgl/">rgl</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span></code></pre></div>
+<pre><code>## Loading required package: RRPP</code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/asl/svd">svd</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.maths.nottingham.ac.uk/~ild/shapes">shapes</a></span><span class="op">)</span>
+<span class="va">sirens</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../inst/extdata/sirens_updated.csv"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
-##   Specimen.Number = col_double(),
 ##   Institution = col_character(),
-##   Collections.Number = col_character(),
-##   Specific_Epithet = col_character(),
-##   Site.Location = col_character(),
+##   Collection_Number = col_character(),
+##   Species = col_character(),
+##   State = col_character(),
+##   County = col_character(),
+##   Locality = col_character(),
 ##   Latitude = col_double(),
 ##   Longitude = col_double(),
-##   Year = col_double(),
-##   Month = col_double(),
-##   Day = col_double(),
-##   Date = col_date(format = ""),
-##   Genus = col_character(),
-##   Species = col_character()
+##   Basin = col_logical(),
+##   Drainage = col_logical()
 ## )</code></pre>
-<p>Include example of function</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"SirenDorsal.TPS"</span>, package <span class="op">=</span> <span class="st">"rivera.package"</span><span class="op">)</span>
+<span class="va">sirens_dorsal</span> <span class="op">&lt;-</span> <span class="fu">geomorph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="va">file_path</span>, specID <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+## No curves detected; all points appear to be fixed landmarks.</code></pre>
+</div>
+<div id="generalized-procrustes-analysis" class="section level2">
+<h2 class="hasAnchor">
+<a href="#generalized-procrustes-analysis" class="anchor"></a>Generalized Procrustes Analysis</h2>
+<p>This function performs a generalized Procrustes analysis/superisposition of multiple specimens about their mean. This function requires the input of specimen landmark coordinates. A plot of superimposed coordinates is returned and their centroid sizes in dataframe formate. This function then plots the Procrustres coordinates. This is a useful analysis for visualizing subtle variation in morphology.</p>
+</div>
+<div id="principal-components-analysis" class="section level2">
+<h2 class="hasAnchor">
+<a href="#principal-components-analysis" class="anchor"></a>Principal Components Analysis</h2>
+<p>This function performs a traditional principal components analysis. The input for this function is the generalized Procrustes analysis proceeding this function. A PCA plot shows clusters of samples based on their similarity. This can be helpful to visualize similarities among geographically isolated taxa, different species, etc.</p>
 </div>
   </div>
 
