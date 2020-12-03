@@ -3,7 +3,7 @@
 #' @param sirens_dorsal siren specimen shape dataset
 #' @importFrom geomorph gpagen
 #' @return a vector containing the Centroid Size of the configurations (graphic)
-#' 
+#' @export
 gpa <- function(sirens_dorsal)
   {
   gpa <- gpagen(sirens_dorsal)

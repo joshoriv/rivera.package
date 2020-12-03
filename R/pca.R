@@ -4,7 +4,7 @@
 #' @param pca Principal Components Analysis for shape data
 #' @importFrom geomorph gm.prcomp
 #' @return PCA graph for shape data (graph)
-#' 
+#' @export
 pca <- function(gpa)
 {
   pca <- gm.prcomp(gpa$coords)

@@ -8,6 +8,7 @@
 #' @importFrom graphics points
 #' @importFrom stats na.omit
 #' @return map of specimen localities (graphic)
+#' @export
 sirens_map <- function(sirens, Longitude, Latitude)
 {sirens_map <- dplyr::select(sirens, Longitude, Latitude) %>% 
   na.omit()
