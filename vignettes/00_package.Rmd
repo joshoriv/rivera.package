@@ -1,0 +1,82 @@
+---
+title: "Tutorial"
+author: "Josh Rivera"
+date: "11/16/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Howdy! The first thing one should do to utilize this set of functions is install the Rivera package. *code seen below*
+
+```{r, eval = FALSE}
+devtools::install_github("joshoriv/rivera.package")
+```
+
+Once the package has been installed, please be sure to load the package into your R console.
+
+```{r}
+library(rivera.package)
+```
+
+At this point, we can go ahead and load the required packages for this tutorial. Following this we'll be reading in the siren locality data and siren shape data (landmark coordinates).
+
+```{r}
+library(readr)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(mapdata)
+library(maps)
+library(rgl)
+library(geomorph)
+library(svd)
+library(shapes)
+sirens <- readr::read_csv("../inst/extdata/sirens_updated.csv")
+file_path <- system.file("extdata", "SirenDorsal.TPS", package = "rivera.package")
+sirens_dorsal <- geomorph::readland.tps(file_path, specID = "ID")
+
+  
+```
+
+## Specimen Locality Distribution Map
+
+The purpose of this function is to generate a map of siren specimen localities. Specimen distribution maps are helpful in understanding trends in biological phenomena. In order for this function to process, the coordinate information (longitude & latitude) must be available for each specimen. The world map, where the specimen datapoints will be superimposed, will be selected by providing coordinates of interest.
+
+```{r}
+
+sirens_map <- dplyr::select(sirens, Longitude, Latitude) %>% 
+  na.omit()
+world <- ne_countries(scale = "medium", returnclass = "sf")
+ggplot(data = world) +
+  geom_sf() +
+  geom_point(data = sirens_map, mapping = aes(x = Longitude, y = Latitude), color = "blue") +
+  coord_sf(xlim = c(-110, -75), ylim = c(22, 50), expand = FALSE)
+  
+```
+
+## Generalized Procrustes Analysis
+
+This function performs a generalized Procrustes analysis/superisposition of multiple specimens about their mean. This function requires the input of specimen landmark coordinates. A plot of superimposed coordinates is returned and their centroid sizes in dataframe formate. This function then plots the Procrustres coordinates. This is a useful analysis for visualizing subtle variation in morphology.
+
+```{r}
+
+gpa <- gpagen(sirens_dorsal)
+plot(gpa)
+  
+```
+
+## Principal Components Analysis
+
+This function performs a traditional principal components analysis. The input for this function is the generalized Procrustes analysis proceeding this function. A PCA plot shows clusters of samples based on their similarity. This can be helpful to visualize similarities among geographically isolated taxa, different species, etc.
+
+```{r}
+
+pca <- gm.prcomp(gpa$coords)
+  summary(pca)
+  plot(pca, main = "PCA")
+  
+```
